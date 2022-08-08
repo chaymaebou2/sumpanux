@@ -14,17 +14,17 @@ class CreateCategoriesTable extends Migration
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->bigIncrements('IDCategorie');
-            $table->string('LibelleCat');
-            $table->string('isWebsite');
+            $table->bigIncrements('id');
+            $table->string('nomCategorie');
+            $table->boolean('isWebsite');
             $table->timestamps();
 
-            $table->unsignedBigInteger('url_img')->nullable();
-            $table->foreign('url_img')->references('url_img')->on('Formation')
+            $table->unsignedBigInteger('urlbackground')->nullable();
+            $table->foreign('urlbackground')->references('urlbackground')->on('Formation')
                   ->onUpdate('cascade')->onDelete('cascade');
         });
     }
-
+ 
     /**
      * Reverse the migrations.
      *

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateImageConverturesTable extends Migration
+class CreateTpSolutionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateImageConverturesTable extends Migration
      */
     public function up()
     {
-        Schema::create('image_convertures', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('urlbackground');
-            $table->string('titre');
+        Schema::create('tp_solutions', function (Blueprint $table) {
+            $table->bigIncrements('IdTPS');
+            $table->string('Titre');
+            $table->string('Lien_fichier');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateImageConverturesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('image_convertures');
+        Schema::dropIfExists('tp_solutions');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateImageConverturesTable extends Migration
+class CreatePaiemmentEtudiantsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateImageConverturesTable extends Migration
      */
     public function up()
     {
-        Schema::create('image_convertures', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('urlbackground');
-            $table->string('titre');
+        Schema::create('paiemment_etudiants', function (Blueprint $table) {
+            $table->bigIncrements('IdPaiement');
+            $table->float('Montant');
+            $table->date('DatePaiement');
+            $table->string('TypePaiement');
+            $table->string('Remarque');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateImageConverturesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('image_convertures');
+        Schema::dropIfExists('paiemment_etudiants');
     }
 }

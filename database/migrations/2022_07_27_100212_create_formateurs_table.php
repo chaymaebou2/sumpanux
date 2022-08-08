@@ -15,9 +15,9 @@ class CreateFormateursTable extends Migration
     {
         Schema::create('formateurs', function (Blueprint $table) {
             $table->bigIncrements('IDFormateur');;
-            $table->string('Nom');
+            $table->string('formateur');
             $table->string('Prenom');
-            $table->string('Url_photoprofile');
+            $table->string('url_img_prof');
             $table->string('Cin');
             $table->date('DateNaiss');
             $table->timestamps();

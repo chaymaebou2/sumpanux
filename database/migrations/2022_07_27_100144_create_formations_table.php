@@ -14,19 +14,18 @@ class CreateFormationsTable extends Migration
     public function up()
     {
         Schema::create('formations', function (Blueprint $table) {
-            $table->bigIncrements('IDFormation');
-            $table->String('NomFormation');
-            
-            $table->Float('Prix');
+            $table->bigIncrements('id');
+            $table->String('nomCour');
+            $table->Float('prix');
             $table->String('Details');
-            $table->Float('Nombreh');
+            $table->Float('nbrH');
             $table->Float('nbrEtoile');
-            $table->String('isnew');
-            $table->String('isbest');
-            $table->String('isWebsite');
-            $table->String('url_img');
-            $table->Float('NbrMaxEtd');
-            $table->String('ispromos');
+            $table->boolean('isnew');
+            $table->boolean('isbest');
+            $table->boolean('isWebsite');
+            $table->String('urlbackground');
+            $table->Float('nbrmax');
+            $table->boolean('ispromos');
             $table->Float('PrixPromos');
 
             $table->unsignedBigInteger('Titre')->nullable();
@@ -41,6 +40,9 @@ class CreateFormationsTable extends Migration
             $table->unsignedBigInteger('IDFAQ')->nullable();
             $table->foreign('IDFAQ')->references('IDFAQ')->on('FAQ')
                 ->onUpdate('cascade')->onDelete('cascade');   
+            $table->unsignedBigInteger('IdGroupe')->nullable();
+            $table->foreign('IdGroupe')->references('IdGroupe')->on('Groupe')
+                ->onUpdate('cascade')->onDelete('cascade'); 
 
         });
     }
