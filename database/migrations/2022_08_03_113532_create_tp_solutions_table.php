@@ -15,7 +15,8 @@ class CreateTpSolutionsTable extends Migration
     {
         Schema::create('tp_solutions', function (Blueprint $table) {
             $table->bigIncrements('IdTPS');
-            $table->string('Titre');
+            $table->string('nomcour');
+            $table->float('size');
             $table->string('Lien_fichier');
             $table->timestamps();
         });

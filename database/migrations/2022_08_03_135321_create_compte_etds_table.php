@@ -15,8 +15,10 @@ class CreateCompteEtdsTable extends Migration
     {
         Schema::create('compte_etds', function (Blueprint $table) {
             $table->bigIncrements('IdIcompte');
-            $table->date('Login');
-            $table->date('Motdepasse');
+            $table->string('Textuser');
+            $table->string('Emailuser');
+            $table->string('Motdepasse');
+            $table->string('Imageuser');
             $table->timestamps();
         });
     }

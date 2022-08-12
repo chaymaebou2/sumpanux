@@ -15,10 +15,10 @@ class CreatePaiemmentEtudiantsTable extends Migration
     {
         Schema::create('paiemment_etudiants', function (Blueprint $table) {
             $table->bigIncrements('IdPaiement');
-            $table->float('Montant');
-            $table->date('DatePaiement');
+            $table->float('prix');
+            $table->date('date');
             $table->string('TypePaiement');
-            $table->string('Remarque');
+            $table->string('desc');
             $table->timestamps();
         });
     }

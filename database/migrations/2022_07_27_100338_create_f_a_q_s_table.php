@@ -17,6 +17,7 @@ class CreateFAQSTable extends Migration
             $table->bigIncrements('IDFAQ');
             $table->string('Question');
             $table->string('Reponse');
+            $table->boolean('isclicked');
             $table->timestamps();
         });
     }

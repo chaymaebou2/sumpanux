@@ -15,11 +15,15 @@ class CreateSeancesTable extends Migration
     {
         Schema::create('seances', function (Blueprint $table) {
             $table->bigIncrements('IdSeance');
-            $table->date('DateSeance');
+            $table->string('nomseance');
+            $table->integer('jourseance');
             $table->string('HeureD');
             $table->string('HeureF');
             $table->string('TypeSeance');
             $table->string('CauseAnnuler');
+            $table->string('precence');
+            $table->integer('color');
+            $table->date('dateseance');
             $table->timestamps();
         });
     }
