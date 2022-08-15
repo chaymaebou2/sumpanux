@@ -46,24 +46,24 @@ class apiController extends Controller
     }
 
 
-    function data1()
+    function Course()
     {   
         
-        //$formation = DB::table("formations")->select("id","nomCour","formateur","url_img_prof","prix","note","nbrH","nbrmax","urlbackground","descr")->get();
+        $formation = DB::table("formations")->join("formateurs","formations.IDFormateur","=","formateurs.IDFormateur")->select("id","nomCour","formateurs.formateur",/*"url_img_prof",*/"prix","note","nbrH","nbrmax","urlbackground"/*,"descr"*/)->get();
         $plan = DB::table("plans")->select("Titre","details")->get(); 
        $faq = DB::table("f_a_q_s")->select("Question","Reponse","isclicked")->get();
 
         
         return  response()::json(array(
-            //'formation' => $formation,
+            'formation' => $formation,
             'plan' => $plan,
             'faq' => $faq,
         ));
     }
 
-    function data2()
+    function DetailCourseConnect()
     {
-        //$formation = DB::table("formation")->select("urlbackground","title","prof","prix","note","classe","heure","desc","date","lienwtsp","LoadingProgresse","hoursProgress","classProgress")->get();
+        $formation = DB::table("formation")->join("groupes","formations.IdGroupe","=","groupes.IdGroupe")->select("urlbackground"/*,"title","prof"*/,"prix","note"/*,"classe","heure","desc"*/,"groupes.date","groupes.lienwtsp"/*,"LoadingProgresse","hoursProgress","classProgress"*/)->get();
         $members= DB::table("compte_etds")->select( "Textuser","Emailuser","Imageuser")->get();
         $seance = DB::table("seances")->select("nomseance", "dateseance","precence","jourseance","color")->get();
         $cours = DB::table("tp_solutions")->select("nomcour","size")->get();
@@ -72,7 +72,7 @@ class apiController extends Controller
         $payement = DB::table("paiemment_etudiants")->select("date","prix","desc")->get();
 
         return response()::json(array(
-        //'formation' => $formation,
+        'formation' => $formation,
         'members' => $members,
         'seance' => $seance,
         'cours' => $cours,
@@ -82,11 +82,11 @@ class apiController extends Controller
         ));
     }
 
-    function data3()
+    function DetailCourse()
     {   
-        //$formation=DB::table("formation")->select("urlbackground","title","prof","prix","note","classe","heure","desc","date","lienwtsp","LoadingProgresse","hoursProgress","classProgress")->get();
-        //$members = DB::table("members")->select("Textuser","Emailuser","Imageuser")->get(); 
-       $seance = DB::table("seances")->select("nomseance","dateseance","jourseance")->get();
+        $formation=DB::table("formation")->join("groupes","formations.IdGroupe","=","groupes.IdGroupe")->select("urlbackground"/*,"title","prof"*/,"prix","note"/*,"classe","heure","desc"*/,"groupes.date","groupes.lienwtsp"/*,"LoadingProgresse","hoursProgress","classProgress"*/)->get();
+        $members = DB::table("compte_etds")->select("Textuser","Emailuser","Imageuser")->get(); 
+        $seance = DB::table("seances")->select("nomseance","dateseance","jourseance")->get();
         $cours= DB::table("tp_solutions")->select("nomcour","size")->get();
         $tp= DB::table("tp_solutions")->select("nomcour","size")->get();
         $solution=DB::table("tp_solutions")->select("nomcour","size")->get();
@@ -94,13 +94,13 @@ class apiController extends Controller
 
 
         return  response()::json(array(
-            //'formation'=>$formation,
-            //'members'=>$members, 
+            'formation'=>$formation,
+            'members'=>$members, 
             'seance' => $seance,
             'cours' => $cours,
             'tp' => $tp,
             'solution'=>$solution,
-            'payement'=>$payement
+            'payement'=>$payement,
         ));
     }
 

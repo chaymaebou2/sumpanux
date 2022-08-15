@@ -28,6 +28,7 @@ class CreateFormationsTable extends Migration
             $table->boolean('ispromos');
             $table->Float('PrixPromos');
             $table->string('title');
+            $table->float('note');
 
             $table->unsignedBigInteger('Titre')->nullable();
             $table->foreign('Titre')->references('Titre')->on('Plan')

@@ -17,7 +17,7 @@ class CreateGroupesTable extends Migration
             $table->bigIncrements('IdGroupe');
             $table->string('NomGroupe');
             $table->date('DatePrevu');
-            $table->date('DateDebut');
+            $table->date('date');
             $table->date('DateFin');
             $table->float('PrixReel');
             $table->string('Attestation_imprimer');
@@ -25,7 +25,7 @@ class CreateGroupesTable extends Migration
             $table->string('TypePaiement');
             $table->integer('PourcentageProf');
             $table->float('PrixHeure');
-            $table->string('LienGroupeWhatssap');
+            $table->string('lienwtsp');
             $table->timestamps();
 
             $table->unsignedBigInteger('IdJours')->nullable();
