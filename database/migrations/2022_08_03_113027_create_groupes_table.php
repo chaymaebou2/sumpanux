@@ -19,14 +19,24 @@ class CreateGroupesTable extends Migration
             $table->date('DatePrevu');
             $table->date('date');
             $table->date('DateFin');
-            $table->float('PrixReel');
+            $table->String('urlbackground');
+            $table->float('Prix');
             $table->string('Attestation_imprimer');
-            $table->integer('NombreHeure');
+            $table->integer('Heure');
+            $table->integer('hoursProgress');
             $table->string('TypePaiement');
+            $table->string('LoadingProgresse');
             $table->integer('PourcentageProf');
-            $table->float('PrixHeure');
             $table->string('lienwtsp');
+            $table->string('title');
+            $table->float('note');
+            $table->string('classe');
+            $table->string('desc');
+            $table->string('classProgress');
+            $table->string('prof');
             $table->timestamps();
+
+         
 
             $table->unsignedBigInteger('IdJours')->nullable();
             $table->foreign('IdJours')->references('IdJours')->on('Jours')

@@ -19,7 +19,7 @@ class CreateEtudiantsTable extends Migration
             $table->string('prenom');
             $table->date('DateNaiss');
             $table->string('cin');
-            $table->string('Url_img');
+            $table->string('Imageuser');
             $table->boolean('isActive');
             $table->timestamps();
 

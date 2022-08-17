@@ -14,7 +14,7 @@ class CreateCompteEtdsTable extends Migration
     public function up()
     {
         Schema::create('compte_etds', function (Blueprint $table) {
-            $table->bigIncrements('IdIcompte');
+            $table->bigIncrements('IdCompte');
             $table->string('Textuser');
             $table->string('Emailuser');
             $table->string('Motdepasse');

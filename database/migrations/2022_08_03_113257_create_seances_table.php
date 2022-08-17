@@ -25,6 +25,12 @@ class CreateSeancesTable extends Migration
             $table->integer('color');
             $table->date('dateseance');
             $table->timestamps();
+
+            $table->unsignedBigInteger('Idabsence')->nullable();
+            $table->foreign('Idabsence')->references('Idabsence')->on('absenses')
+                ->onUpdate('cascade')->onDelete('cascade');
+
+            
         });
     }
 

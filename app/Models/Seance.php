@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Seance extends Model
 {
     use HasFactory;
+    public function Seance() 
+    { 
+        return $this->hasMany(Absence::class); 
+    }
 }

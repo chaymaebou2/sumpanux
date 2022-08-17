@@ -19,16 +19,19 @@ class CreateFormationsTable extends Migration
             $table->Float('prix');
             $table->String('Details');
             $table->Float('nbrH');
-            $table->Float('nbrEtoile');
+            $table->Float('nbrmax');
             $table->boolean('isnew');
             $table->boolean('isbest');
             $table->boolean('isWebsite');
             $table->String('urlbackground');
+            $table->String('url_img_prof');
+            $table->String('descr');
             $table->Float('nbrmax');
             $table->boolean('ispromos');
-            $table->Float('PrixPromos');
+            $table->Float('Prix');
             $table->string('title');
             $table->float('note');
+
 
             $table->unsignedBigInteger('Titre')->nullable();
             $table->foreign('Titre')->references('Titre')->on('Plan')

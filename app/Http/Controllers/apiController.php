@@ -49,7 +49,7 @@ class apiController extends Controller
     function Course()
     {   
         
-        $formation = DB::table("formations")->join("formateurs","formations.IDFormateur","=","formateurs.IDFormateur")->select("id","nomCour","formateurs.formateur",/*"url_img_prof",*/"prix","note","nbrH","nbrmax","urlbackground"/*,"descr"*/)->get();
+        $formation = DB::table("formations")->join("formateurs","formations.IDFormateur","=","formateurs.IDFormateur")->select("id","nomCour","formateurs.formateur","formateurs.url_img_prof","prix","note","nbrH","nbrmax","urlbackground","descr")->get();
         $plan = DB::table("plans")->select("Titre","details")->get(); 
        $faq = DB::table("f_a_q_s")->select("Question","Reponse","isclicked")->get();
 
@@ -63,16 +63,18 @@ class apiController extends Controller
 
     function DetailCourseConnect()
     {
-        $formation = DB::table("formation")->join("groupes","formations.IdGroupe","=","groupes.IdGroupe")->select("urlbackground"/*,"title","prof"*/,"prix","note"/*,"classe","heure","desc"*/,"groupes.date","groupes.lienwtsp"/*,"LoadingProgresse","hoursProgress","classProgress"*/)->get();
-        $members= DB::table("compte_etds")->select( "Textuser","Emailuser","Imageuser")->get();
-        $seance = DB::table("seances")->select("nomseance", "dateseance","precence","jourseance","color")->get();
+       // $groupes = DB::table("groupes")->select("urlbackground","title","prof","prix","note","classe","heure",/*"desc",*/"groupes.date","groupes.lienwtsp","LoadingProgresse","hoursProgress","classProgress")->get();
+        $members= DB::table("etudiants")->join("compte_etds","etudiants.IdCompte","=","compte_etds.IdCompte")->select( "Nom","compte_etds.Emailuser"/*,"Imageuser"*/)->get();
+        $seance = DB::table("seances")->join("absenses","seances.Idabsence","=","absenses.Idabsence")->select("nomseance", "dateseance","absenses.precence","jourseance","color")->get();
         $cours = DB::table("tp_solutions")->select("nomcour","size")->get();
         $tp = DB::table("tp_solutions")->select("nomcour","size")->get();
         $solution = DB::table("tp_solutions")->select("nomcour","size")->get();
         $payement = DB::table("paiemment_etudiants")->select("date","prix","desc")->get();
+          
+        
 
         return response()::json(array(
-        'formation' => $formation,
+        //'groupes' => $groupes,
         'members' => $members,
         'seance' => $seance,
         'cours' => $cours,
@@ -84,17 +86,25 @@ class apiController extends Controller
 
     function DetailCourse()
     {   
-        $formation=DB::table("formation")->join("groupes","formations.IdGroupe","=","groupes.IdGroupe")->select("urlbackground"/*,"title","prof"*/,"prix","note"/*,"classe","heure","desc"*/,"groupes.date","groupes.lienwtsp"/*,"LoadingProgresse","hoursProgress","classProgress"*/)->get();
-        $members = DB::table("compte_etds")->select("Textuser","Emailuser","Imageuser")->get(); 
+       // $groupes=DB::table("groupes")->select("urlbackground","title","prof","prix","note","classe","heure",/*"desc",*/"date","lienwtsp","LoadingProgresse","hoursProgress","classProgress")->get();
+        $members = DB::table("etudiants")->join("compte_etds","etudiants.IdCompte","=","compte_etds.IdCompte")->select("Nom","compte_etds.Emailuser","Imageuser")->get(); 
         $seance = DB::table("seances")->select("nomseance","dateseance","jourseance")->get();
         $cours= DB::table("tp_solutions")->select("nomcour","size")->get();
         $tp= DB::table("tp_solutions")->select("nomcour","size")->get();
         $solution=DB::table("tp_solutions")->select("nomcour","size")->get();
-        $payement=DB::table("paiemment_etudiants")->select("date","prix","desc")->get();
+        $payement=DB::table("paiement_profs")->select("date","prix","desc")->get();
+
+        /*$members->each(function ($var ,$key)
+        {
+         if($var->etat==1)
+         {
+            
+         } 
+        });*/
 
 
         return  response()::json(array(
-            'formation'=>$formation,
+            //'groupes'=>$groupes,
             'members'=>$members, 
             'seance' => $seance,
             'cours' => $cours,
