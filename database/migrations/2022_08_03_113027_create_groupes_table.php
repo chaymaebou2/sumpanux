@@ -46,7 +46,10 @@ class CreateGroupesTable extends Migration
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('IdInscrit')->nullable();
             $table->foreign('IdInscrit')->references('IdInscrit')->on('InscritEtudiant')
-                    ->onUpdate('cascade')->onDelete('cascade');     
+                    ->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedBigInteger('IdPaiement')->nullable();
+            $table->foreign('IdPaiement')->references('IdPaiement')->on('paiement_profs')
+                    ->onUpdate('cascade')->onDelete('cascade');             
 
         });
     }

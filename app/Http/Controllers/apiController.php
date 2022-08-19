@@ -63,18 +63,28 @@ class apiController extends Controller
 
     function DetailCourseConnect()
     {
-       // $groupes = DB::table("groupes")->select("urlbackground","title","prof","prix","note","classe","heure",/*"desc",*/"groupes.date","groupes.lienwtsp","LoadingProgresse","hoursProgress","classProgress")->get();
-        $members= DB::table("etudiants")->join("compte_etds","etudiants.IdCompte","=","compte_etds.IdCompte")->select( "Nom","compte_etds.Emailuser"/*,"Imageuser"*/)->get();
+       $groupes = DB::table("groupes")->join("formations","groupes.IdGroupe","=","formations.IdGroupe")->select("formations.urlbackground","formations.title","prof","formations.prix","formations.note","classe","heure","formations.descr","groupes.date","groupes.lienwtsp","LoadingProgresse","hoursProgress","classProgress")->get();
+        $members= DB::table("etudiants")->join("compte_etds","etudiants.IdCompte","=","compte_etds.IdCompte")->select( "Nom","compte_etds.Emailuser","etudiants.Imageuser")->get();
         $seance = DB::table("seances")->join("absenses","seances.Idabsence","=","absenses.Idabsence")->select("nomseance", "dateseance","absenses.precence","jourseance","color")->get();
         $cours = DB::table("tp_solutions")->select("nomcour","size")->get();
         $tp = DB::table("tp_solutions")->select("nomcour","size")->get();
         $solution = DB::table("tp_solutions")->select("nomcour","size")->get();
         $payement = DB::table("paiemment_etudiants")->select("date","prix","desc")->get();
           
-        
+        $Absense = \App\Models\Absense::where('precence', '1')->get(['precence']);
+
+        foreach($Absense as $precence){
+            $result = $precence->absense;
+                if($result == 1){
+                    return "present ";
+                }
+                else{
+                    return "absent";
+                 }
+        }
 
         return response()::json(array(
-        //'groupes' => $groupes,
+        'groupes' => $groupes,
         'members' => $members,
         'seance' => $seance,
         'cours' => $cours,
@@ -86,21 +96,27 @@ class apiController extends Controller
 
     function DetailCourse()
     {   
-       // $groupes=DB::table("groupes")->select("urlbackground","title","prof","prix","note","classe","heure",/*"desc",*/"date","lienwtsp","LoadingProgresse","hoursProgress","classProgress")->get();
-        $members = DB::table("etudiants")->join("compte_etds","etudiants.IdCompte","=","compte_etds.IdCompte")->select("Nom","compte_etds.Emailuser","Imageuser")->get(); 
+        $groupes = DB::table("groupes")->join("formations","groupes.IdGroupe","=","formations.IdGroupe")->select("formations.urlbackground","formations.title","prof","formations.prix","formations.note","classe","heure","formations.descr","groupes.date","groupes.lienwtsp","LoadingProgresse","hoursProgress","classProgress")->get();
+        $members= DB::table("etudiants")->join("compte_etds","etudiants.IdCompte","=","compte_etds.IdCompte")->select( "Nom","compte_etds.Emailuser","etudiants.Imageuser")->get(); 
         $seance = DB::table("seances")->select("nomseance","dateseance","jourseance")->get();
         $cours= DB::table("tp_solutions")->select("nomcour","size")->get();
         $tp= DB::table("tp_solutions")->select("nomcour","size")->get();
         $solution=DB::table("tp_solutions")->select("nomcour","size")->get();
-        $payement=DB::table("paiement_profs")->select("date","prix","desc")->get();
+        $payement=DB::table("paiement_profs")->join("groupes","paiement_profs.IdPaiement","=","groupes.IdPaiement")->select("groupes.date","prix","desc")->get();
 
-        /*$members->each(function ($var ,$key)
-        {
-         if($var->etat==1)
-         {
-            
-         } 
-        });*/
+        
+
+        $Absense = \App\Models\Absense::where('precence', '1')->get(['precence']);
+
+        foreach($Absense as $precence){
+            $result = $precence->absense;
+                if($result == 1){
+                    return "present ";
+                }
+                else{
+                    return "absent";
+                 }
+        }
 
 
         return  response()::json(array(

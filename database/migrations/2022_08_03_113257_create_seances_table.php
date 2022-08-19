@@ -31,6 +31,7 @@ class CreateSeancesTable extends Migration
                 ->onUpdate('cascade')->onDelete('cascade');
 
             
+            
         });
     }
 

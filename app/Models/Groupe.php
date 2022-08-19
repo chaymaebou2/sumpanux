@@ -14,5 +14,6 @@ class Groupe extends Model
         return $this->hasMany(Jour::class);
         return $this->hasMany(TpSolution::class);
         return $this->hasMany(InscritEtudiant::class);
+        return $this->hasMany(paiement_prof::class);
     }     
 }

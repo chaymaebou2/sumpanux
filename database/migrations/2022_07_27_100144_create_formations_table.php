@@ -16,7 +16,6 @@ class CreateFormationsTable extends Migration
         Schema::create('formations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->String('nomCour');
-            $table->Float('prix');
             $table->String('Details');
             $table->Float('nbrH');
             $table->Float('nbrmax');
@@ -28,7 +27,7 @@ class CreateFormationsTable extends Migration
             $table->String('descr');
             $table->Float('nbrmax');
             $table->boolean('ispromos');
-            $table->Float('Prix');
+            $table->Float('prix');
             $table->string('title');
             $table->float('note');
 

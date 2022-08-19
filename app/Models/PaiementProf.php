@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class PaiementProf extends Model
 {
     use HasFactory;
+    public function PaiementProf()
+    { 
+        return $this->belongsTo(Groupe::class); 
+    }
 }
